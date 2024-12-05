@@ -475,25 +475,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bruh"
-version = "0.1.0"
-dependencies = [
- "base64",
- "colors-transform",
- "css-color-parser",
- "eframe",
- "egui_extras",
- "encoding",
- "encoding_rs",
- "env_logger",
- "image",
- "rand",
- "show-image",
- "skia-safe",
- "winapi",
-]
-
-[[package]]
 name = "bumpalo"
 version = "3.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3289,6 +3270,25 @@ name = "version_check"
 version = "0.9.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+
+[[package]]
+name = "viv"
+version = "0.1.0"
+dependencies = [
+ "base64",
+ "colors-transform",
+ "css-color-parser",
+ "eframe",
+ "egui_extras",
+ "encoding",
+ "encoding_rs",
+ "env_logger",
+ "image",
+ "rand",
+ "show-image",
+ "skia-safe",
+ "winapi",
+]
 
 [[package]]
 name = "waker-fn"

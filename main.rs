@@ -3,6 +3,7 @@
 use eframe::egui;
 use egui_extras::RetainedImage;
 
+
 extern crate css_color_parser;
 
 use colors_transform::Rgb;
@@ -29,7 +30,7 @@ fn vec_to_u32_ne(bytes: &[u8]) -> u32 {
     u32::from_ne_bytes(result)
 }
 
-fn png_to_bruh(path: PathBuf) -> Result<(), std::io::Error> {
+fn png_to_viv(path: PathBuf) -> Result<(), std::io::Error> {
     let img = image::open(&path).expect("File not found!");
     let mut str = String::new();
     let mut last_line = 0;
@@ -55,12 +56,12 @@ fn png_to_bruh(path: PathBuf) -> Result<(), std::io::Error> {
 
         let height_bytes: [u8; 4] = height.to_ne_bytes();
         let width_bytes: [u8; 4] = width.to_ne_bytes();
-        let path_to_bruh = path_str.replace(".png", ".bruh");
+        let path_to_viv = path_str.replace(".png", ".viv");
 
         let mut file = OpenOptions::new()
             .write(true)
             .create(true)
-            .open(path_to_bruh)
+            .open(path_to_viv)
             .expect("Couldnt write");
         let string_bytes: Vec<u8> = Vec::from(str.as_bytes());
 
@@ -75,7 +76,7 @@ fn png_to_bruh(path: PathBuf) -> Result<(), std::io::Error> {
     Ok(())
 }
 
-fn bruh_to_png(path: PathBuf) -> (u32, u32) {
+fn viv_to_png(path: PathBuf) -> (u32, u32) {
     let mut contents: Vec<u8> = fs::read(&path).expect("Couldn't read file.");
     let binding: Vec<_> = contents.drain(0..8).collect();
 
@@ -134,6 +135,7 @@ fn bruh_to_png(path: PathBuf) -> (u32, u32) {
 }
 
 fn main() -> Result<(), eframe::Error> {
+
     let args: Vec<String> = env::args().collect();
     let file_path: PathBuf = (&args[1]).into();
 
@@ -144,14 +146,14 @@ fn main() -> Result<(), eframe::Error> {
 
         let path: PathBuf = (&args[2]).into();
 
-        match png_to_bruh(path) {
-            Ok(()) => println!("{}", "Successfully converted PNG to BRUH"),
-            Err(_) => println!("{}", "Failed to convert PNG to BRUH"),
+        match png_to_viv(path) {
+            Ok(()) => println!("{}", "Successfully converted PNG to VIV"),
+            Err(_) => println!("{}", "Failed to convert PNG to VIV")
         }
 
         Ok(())
     } else {
-        let (width, height) = bruh_to_png(file_path);
+        let (width, height) = viv_to_png(file_path);
         println!("{} {}", width, height);
         let options = eframe::NativeOptions {
             resizable: false,
@@ -165,6 +167,7 @@ fn main() -> Result<(), eframe::Error> {
             Box::new(|_cc| Box::<ImagePreview>::default()),
         )
     }
+    
 }
 struct ImagePreview {
     image: RetainedImage,
